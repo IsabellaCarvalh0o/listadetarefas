@@ -1,50 +1,107 @@
-import React, {useState} from 'react';
-import {Image,Text,Ionicons,TextInput,TouchableOpacity,FlatList,StyleSheet,View} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
 
-export default function App(){
-    const [tarefaAtual,setTarefaAtual] = useState("");
-    const [listaTarefas,setListaTarefas] = useState([]);
+export default function App() {
+  const [tarefaAtual, setTarefaAtual] = useState('');
+  const [listaTarefas, setListaTarefas] = useState([]);
 
-    const adicionarTarefa = () =>{
-        if (tarefaAtual.trim() === "") return;
-        setListaTarefas([
-            ...listaTarefas,
-            {id:Date.now().toString(), texto: tarefaAtual}])
-            setTarefaAtual('');
-        };
+  const adicionarTarefa = () => {
+    if (tarefaAtual.trim() === '') return;
+    setListaTarefas([
+      ...listaTarefas,
+      { id: Date.now().toString(), texto: tarefaAtual }
+    ]);
+    setTarefaAtual('');
+  };
 
-    const removerTarefa = (id) => {
-        setListaTarefas(listaTarefas.filter(item => item.id !== id))
-    };
-    
-    return (
-        
-        <View style={estilos.container}>
-            <Text style = {estilos.titulo}> Minha Lista</Text>
-        
-            <View>
-                <TextInput
-                    placeholder="Digite uma tarefa aqui"
-                    placeholderTextcolor="#888"
-                    value = {tarefaAtual}
-                    onChangeText = {setTarefaAtual}>
-                </TextInput>
-                <TouchableOpacity style = {estilos.botaoAdicionar} onPress={adicionarTarefa}>
-                    <Text style = {estilos.textoBotaoAdicionar}> + </Text>
-                </TouchableOpacity>
+  const removerTarefa = (id) => {
+    setListaTarefas(listaTarefas.filter(item => item.id !== id));
+  };
 
-            </View>
-            <FlatList>
-                data = {listaTarefas}
-                keyExtractor = {(item) => item.id}
-                renderItem{({item}) => (
-                    <TouchableOpacity style = {estilo.tarefa } onPress={() => removerTarefa (item.id)}>
-                    <Text style = {estilos.textoTarefa}>{item.texto}</Text>
-                    </TouchableOpacity>
+  return (
+    <View style={estilos.container}>
+      <View>
+      <Text style={estilos.titulo}>Minha Lista</Text>
+      </View>
+      <View style={estilos.containerInput}>
+        <TextInput
+          style={estilos.input}
+          placeholder="Digite uma tarefa..."
+          placeholderTextColor="#888"
+          value={tarefaAtual}
+          onChangeText={setTarefaAtual}
+        />
+        <TouchableOpacity style={estilos.botaoAdicionar} onPress={adicionarTarefa}>
+          <Text style={estilos.textoBotaoAdicionar}>+</Text>
+        </TouchableOpacity>
+      </View>
 
-                )}
-            </FlatList>
-        </View>
+      <FlatList
+        data={listaTarefas}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={estilos.tarefa}
+            onPress={() => removerTarefa(item.id)}
+          >
+            <Text style={estilos.textoTarefa}>{item.texto}</Text>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
+  );
+}
 
-    );
-};
+const estilos = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+    padding: 20,
+    paddingTop: 60,
+  },
+  titulo: {
+    color: '#00FF00',
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+
+  containerInput: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: '#111',
+    color: '#00FF00',
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#00FF00',
+  },
+  botaoAdicionar: {
+    marginLeft: 10,
+    backgroundColor: '#00FF00',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    borderRadius:8,
+  },
+  textoBotaoAdicionar: {
+    fontSize: 24,
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  tarefa: {
+    backgroundColor: '#111',
+    padding: 15,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#00FF00',
+    marginBottom: 10,
+  },
+  textoTarefa: {
+    color: '#00FF00',
+    fontSize: 16,
+  },
+});
