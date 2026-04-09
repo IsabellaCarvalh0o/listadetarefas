@@ -55,15 +55,16 @@ export default function App() {
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#121214',
     padding: 20,
     paddingTop: 60,
   },
   titulo: {
-    color: '#00FF00',
+    color: '#fff',
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign:'center'
   },
 
   containerInput: {
@@ -73,15 +74,16 @@ const estilos = StyleSheet.create({
   input: {
     flex: 1,
     backgroundColor: '#111',
-    color: '#00FF00',
+    color: '#3279a8',
     padding: 10,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#00FF00',
+    borderColor: '#3279a8',
+    fontSize: 18,
   },
   botaoAdicionar: {
     marginLeft: 10,
-    backgroundColor: '#00FF00',
+    backgroundColor: '#3279a8',
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
@@ -89,7 +91,7 @@ const estilos = StyleSheet.create({
   },
   textoBotaoAdicionar: {
     fontSize: 24,
-    color: '#000',
+    color: '#fff',
     fontWeight: 'bold',
   },
   tarefa: {
@@ -97,11 +99,11 @@ const estilos = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#00FF00',
+    borderColor: '#3279a8',
     marginBottom: 10,
   },
   textoTarefa: {
-    color: '#00FF00',
+    color: '#fff',
     fontSize: 16,
   },
 });
